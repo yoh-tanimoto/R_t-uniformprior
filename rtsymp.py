@@ -30,7 +30,7 @@ def percentile(data, p):
    
 
 #dailyfile = open('testdata.txt', 'r')
-dailyfile = open('sympdata.txt', 'r')
+dailyfile = open('sympdata_it.csv', 'r')
 daily = []
 
 for line in dailyfile.readlines():
