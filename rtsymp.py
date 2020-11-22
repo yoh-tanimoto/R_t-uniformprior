@@ -8,7 +8,7 @@ from scipy.stats import gamma
 from scipy.stats import poisson
 
 def logfactorial(n):
-# returns log(n!)
+# returns log(n!) for a numpy array.
  lf = np.zeros(n.size)
  for i in range(n.size):
    for j in range(int(n[i])+1):
@@ -60,6 +60,8 @@ scale=1/rate
 tau = 7
 # cutoff for infection (14 days for quarantine, 30 days should be enough)
 Tmax = 30
+# the reporting delay, 14 days
+delay = 14
 
 # the infectivity of a single infected
 w = gamma.pdf(np.linspace(0,Tmax,Tmax+1), shape,0,scale)
@@ -118,7 +120,8 @@ for i in range(days-Tmax-tau+1):
 #plt.plot(r,L[10],linewidth=2, color='r')
 #plt.savefig('perc.png')
 
-plt.plot(t,R,linewidth=2, color='r')
+# ignores the last 14 days because the data are unreliable due to reporting delay
+plt.plot(t[0:len(t)-delay],R[0:len(R)-delay],linewidth=2, color='r')
 plt.show()
 #plt.savefig('rtsymp.png')
 
