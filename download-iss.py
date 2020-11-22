@@ -1,4 +1,6 @@
 import requests
+import datetime
+from datetime import timedelta
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
 try:
@@ -16,7 +18,7 @@ lines = (page.text).splitlines()
 dailyy = []
 
 for line in lines:
- if "<script type=\"application/json\" data-for=\"htmlwidget-5683e312fd82693e76ce\">" in line:
+ if "\"width\":[34992,34992,34992" in line:
   fields = line.split(',')
   writing = False
   for word in fields:
@@ -32,6 +34,7 @@ for line in lines:
   break
 
 f = open('sympdatadl.csv', 'w')
+day0 = datetime.date(2020, 1, 28)
 
 for i, n in enumerate(dailyy):
- print(n,i, sep=',', file=f)
+ print((day0+timedelta(days=i)),n, sep=',', file=f)

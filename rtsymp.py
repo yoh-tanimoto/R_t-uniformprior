@@ -36,8 +36,8 @@ daily = []
 
 for line in dailyfile.readlines():
  fields = line.split(',')
-# daily.append(float(fields[0]))
- daily.append(int(fields[0]))
+# daily.append(float(fields[1]))
+ daily.append(int(fields[1]))
 dailyfile.close()
 
 days = len(daily)
