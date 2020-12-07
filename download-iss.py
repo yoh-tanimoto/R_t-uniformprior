@@ -18,7 +18,7 @@ lines = (page.text).splitlines()
 dailyy = []
 
 for line in lines:
- if "\"width\":[34992,34992,34992" in line:
+ if "\"width\":[23328,23328,23328" in line:
   fields = line.split(',')
   writing = False
   for word in fields:
