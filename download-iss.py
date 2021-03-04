@@ -48,8 +48,8 @@ for line in lines:
   fields = line.split(',')
   writing = False
   for word in fields:
-   if '\"y\":[16' in word:
-    dailyy2.append("16")
+   if '\"y\":[14' in word:
+    dailyy2.append("14")
     writing = True
     continue
    if writing == True and ']' in word:
