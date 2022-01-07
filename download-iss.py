@@ -48,7 +48,7 @@ for line in lines:
   fields = line.split(',')
   writing = False
   for word in fields:
-   if '\"y\":[12' in word:
+   if '\"y\":[13' in word:
     dailyy2.append("12")
     writing = True
     continue
