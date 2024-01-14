@@ -15,16 +15,16 @@ page = requests.get('https://www.epicentro.iss.it/coronavirus/dashboard/inizio.h
 # I thank Gianluca Bonifazi @Biuni for helping me find this page
 lines = (page.text).splitlines()
 
-# collect data from "Data prelievo/diagnosi"
+# collect data from "Data inizio sintomi"
 dailyy = []
 
 for line in lines:
- if "\"width\":[77760,77760,77760" in line:
+ if "\"width\":[23328,23328,23328" in line:
   fields = line.split(',')
   writing = False
   for word in fields:
-   if '\"y\":[2' in word:
-    dailyy.append("2")
+   if '\"y\":[15' in word:
+    dailyy.append("15")
     writing = True
     continue
    if writing == True and ']' in word:
@@ -39,3 +39,28 @@ day0 = datetime.date(2020, 1, 28)
 
 for i, n in enumerate(dailyy):
  print((day0+timedelta(days=i)),n, sep=',', file=f)
+ 
+# collect data from "Data inizio sintomi (casi sintomatici)"
+dailyy2 = []
+
+for line in lines:
+ if "\"width\":[23328,23328,23328" in line:
+  fields = line.split(',')
+  writing = False
+  for word in fields:
+   if '\"y\":[13' in word:
+    dailyy2.append("13")
+    writing = True
+    continue
+   if writing == True and ']' in word:
+    dailyy2.append(word[0:word.index("]")])
+    break
+   if writing == True:
+    dailyy2.append(word)
+  break
+
+f2 = open('sympdatadates.csv', 'w')
+day0 = datetime.date(2020, 1, 28)
+
+for i, n in enumerate(dailyy2):
+ print((day0+timedelta(days=i)),n, sep=',', file=f2)
